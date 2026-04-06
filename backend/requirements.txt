@@ -1,0 +1,14 @@
+fastapi
+uvicorn
+scikit-learn
+pandas
+numpy
+joblib
+requests
+beautifulsoup4
+tldextract
+pydantic
+urllib3
+passlib[bcrypt]
+PyJWT
+python-multipart
