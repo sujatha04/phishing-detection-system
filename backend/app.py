@@ -11,13 +11,10 @@ app = FastAPI(
     version="1.0"
 )
 
-# ✅ FIXED CORS (VERY IMPORTANT)
+# ✅ FIXED CORS (Allow all for deployment)
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "http://localhost:5173",   # React frontend
-        "http://127.0.0.1:5173"
-    ],
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
