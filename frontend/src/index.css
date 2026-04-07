@@ -64,6 +64,30 @@ header p {
   font-size: 1.1rem;
 }
 
+.nav-menu {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-top: 1.5rem;
+}
+
+.nav-menu a {
+  text-decoration: none;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+  padding: 5px 0;
+  border-bottom: 2px solid transparent;
+}
+
+.nav-menu a:hover {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+  text-shadow: 0 0 10px var(--accent-glow);
+}
+
 /* Glass panel */
 .glass-panel {
   background: var(--panel-bg);

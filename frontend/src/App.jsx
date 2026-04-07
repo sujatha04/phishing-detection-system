@@ -1,8 +1,9 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 import HomePage from './pages/HomePage';
 import ScanPage from './pages/ScanPage';
 import ResultPage from './pages/ResultPage';
+import AboutPage from './pages/AboutPage';
 
 function App() {
   return (
@@ -11,12 +12,18 @@ function App() {
         <header>
           <h1>Phishing Detection System</h1>
           <p>AI-Powered Multi-Layered Threat Analysis</p>
+          <nav className="nav-menu">
+            <Link to="/">HOME</Link>
+            <Link to="/about">ABOUT SYSTEM</Link>
+            <Link to="/scan">SCAN NOW</Link>
+          </nav>
         </header>
 
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/scan" element={<ScanPage />} />
           <Route path="/result" element={<ResultPage />} />
+          <Route path="/about" element={<AboutPage />} />
         </Routes>
       </div>
     </BrowserRouter>
