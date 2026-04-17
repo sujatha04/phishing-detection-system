@@ -80,38 +80,30 @@ Leave the backend terminal running. Open a **new terminal tab** to start the Rea
 
 When you are ready to publish the system on the internet to show clients or reviewers, you will deploy the Backend and Frontend separately.
 
-### Deploying the Backend (API & ML Model)
+### 🚀 Deploying the Backend to Render
 
-Since this backend contains machine learning packages (Scikit-Learn, Pandas) and API code, it requires a robust cloud platform. **Render**, **Railway**, or **Heroku** are best here. We'll use Render as an example:
+Now that we've optimized the backend, deployment is straightforward.
 
-1. Push your entire code repository to **GitHub**.
-2. Create an account on [Render.com](https://render.com/).
-3. Click **New +** and select **Web Service**.
-4. Connect your GitHub repository.
-5. Setup the deployment:
-   - **Root Directory**: `backend`
-   - **Environment**: Python
-   - **Build Command**: `pip install -r requirements.txt` (You might also instruct it to train the model during build by adding `&& python ../data/generate_mock_data.py && python ml/train.py`)
-   - **Start Command**: `uvicorn app:app --host 0.0.0.0 --port $PORT`
-6. Click Deploy. Once complete, Render will give you a live URL like `https://phishing-detector-api.onrender.com`.
+1.  **Commit and Push**: Ensure all changes (including the new `Procfile` and cleaned `requirements.txt`) are pushed to your GitHub repository.
+2.  **Create Render Web Service**:
+    *   Log in to [Render.com](https://render.com/).
+    *   Click **New +** > **Web Service**.
+    *   Connect your GitHub repository.
+3.  **Configure Settings**:
+    *   **Name**: `phishing-detection-api` (or your choice).
+    *   **Root Directory**: `backend`
+    *   **Environment**: `Python 3`
+    *   **Build Command**: `pip install -r requirements.txt`
+    *   **Start Command**: `uvicorn app:app --host 0.0.0.0 --port $PORT`
+4.  **Wait for Build**: Render will automatically install the lean dependencies and start the server.
+5.  **Update Frontend**: Once the backend is live, copy the URL (e.g., `https://your-app.onrender.com`) and update your frontend's API URL.
 
-> Warning: Machine learning deployments require large memory capacities. Scikit-learn models consume significant RAM, so the free tiers on some cloud platforms may crash or boot slowly.
+---
 
-### Deploying the Frontend (React UI)
+### 🛠️ Troubleshooting & Tips
 
-The frontend is a static bundle of HTML, CSS, and JS. **Vercel** or **Netlify** are perfect for this.
+*   **Memory Errors**: If the build fails with "Out of Memory", it's usually because of `pandas` or `scikit-learn`. Our new `requirements.txt` minimizes this risk.
+*   **ModuleNotFoundError**: If this occurs, ensure the **Root Directory** in Render is set to `backend`.
+*   **CORS Issues**: The `app.py` is already configured to allow all origins (`*`) for easy deployment.
 
-**Preparation**: 
-Before deploying, you must tell the frontend where the live deployment of the backend is. Update your API fetch calls in your React code (e.g., `src/components/Scanner.jsx` or similar) from `http://localhost:8000` to your live API URL (e.g., `https://phishing-detector-api.onrender.com`).
-
-**Steps using Vercel**:
-1. Go to [Vercel.com](https://vercel.com/) and link your GitHub account.
-2. Click **Add New Project** and import your repository.
-3. Configure the Build Settings:
-   - **Framework Preset**: Vite
-   - **Root Directory**: `frontend`
-   - **Build Command**: `npm run build`
-   - **Output Directory**: `dist`
-4. Click **Deploy**. Vercel will build the frontend, and you will receive a lightning-fast live URL for the user interface!
-
-You have successfully built, tested, and deployed an Ensemble-Driven Cyber Threat Intelligence system!
+You have successfully optimized and prepared your system for production!
