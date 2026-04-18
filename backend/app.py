@@ -14,7 +14,10 @@ app = FastAPI(
 # ✅ FIXED CORS (Allow all for deployment)
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=[
+        "http://localhost:5173",
+        "https://phishing-frontend-xjn7.onrender.com"
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -22,6 +25,15 @@ app.add_middleware(
 
 # Include your API routes
 app.include_router(api_router, prefix="/api")
+
+# Root route for health check and welcome message
+@app.get("/")
+async def root():
+    return {
+        "status": "online",
+        "message": "Phishing Detection System API is running",
+        "docs": "/docs"
+    }
 
 # Run server
 if __name__ == "__main__":
